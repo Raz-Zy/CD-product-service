@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-db-config
+  namespace: {{ .Values.namespace }}
+data:
+  POSTGRES_DB: product_db

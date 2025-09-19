@@ -1,0 +1,32 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: product-route
+  namespace: {{ .Values.namespace }}
+spec:
+  parentRefs:
+  - name: public-gateway
+    namespace: nginx-gateway #it will create another gateway with external IP for this route
+  hostnames: ["product-gateway.dara-it.site"]
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/v1
+    backendRefs:
+    - name: product-api
+      port: 8082
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /swagger-ui
+    backendRefs:
+    - name: product-api
+      port: 8082
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /v3/api-docs
+    backendRefs:
+    - name: product-api
+      port: 8082

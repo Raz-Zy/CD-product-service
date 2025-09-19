@@ -1,0 +1,4 @@
+namespace: product-ns
+image:
+  imageRepository: razzy10/product-service
+  tag: latest
